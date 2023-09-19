@@ -6,8 +6,12 @@ import { category, post } from '.';
 export const categoryToPost = pgTable(
   'categoryToPost',
   {
-    categoryId: uuid('categoryId').references(() => category.categoryId),
-    postId: uuid('postId').references(() => post.postId),
+    categoryId: uuid('categoryId')
+      .references(() => category.categoryId)
+      .notNull(),
+    postId: uuid('postId')
+      .references(() => post.postId)
+      .notNull(),
   },
   (table) => ({
     pk: unique().on(table.categoryId, table.postId),

@@ -3,9 +3,9 @@ import { type Client as ClientType, Client } from 'pg';
 
 import * as schema from './schema';
 
+let db: NodePgDatabase<typeof schema>;
 export const client = (() => {
   let client: ClientType;
-  let db: NodePgDatabase<typeof schema>;
 
   return {
     getDb: async () => {
@@ -16,7 +16,7 @@ export const client = (() => {
         await client.connect();
       }
       if (!db) {
-        const db = drizzle(client, { schema });
+        const db = drizzle(client, { schema, logger: true });
         return db;
       }
       return db;

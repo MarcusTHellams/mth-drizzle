@@ -1,7 +1,6 @@
 import 'dotenv/config';
 
 import { client } from './database/client';
-import { post, user } from './database/schema';
 
 (async () => {
   const db = await client.getDb();

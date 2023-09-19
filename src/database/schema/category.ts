@@ -9,5 +9,5 @@ export const category = pgTable('Category', {
 });
 
 export const categoryRelations = relations(category, ({ many }) => ({
-  posts: many(categoryToPost),
+  categoryToPost: many(categoryToPost),
 }));

@@ -2,6 +2,7 @@ import { relations } from 'drizzle-orm';
 import {
   boolean,
   pgTable,
+  text,
   timestamp,
   uuid,
   varchar,
@@ -12,6 +13,7 @@ import { categoryToPost, user } from '.';
 export const post = pgTable('Post', {
   postId: uuid('postId').defaultRandom().primaryKey(),
   title: varchar('email', { length: 255 }).notNull(),
+  content: text('content').notNull(),
   published: boolean('published').notNull().default(false),
   authorId: uuid('authorId')
     .references(() => user.userId)
@@ -25,5 +27,5 @@ export const postRelations = relations(post, ({ many, one }) => ({
     fields: [post.authorId],
     references: [user.userId],
   }),
-  categories: many(categoryToPost),
+  categoryToPost: many(categoryToPost),
 }));

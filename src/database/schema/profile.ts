@@ -6,7 +6,7 @@ import { user } from '.';
 export const profile = pgTable('profile', {
   profileId: uuid('profileId').primaryKey().defaultRandom(),
   userId: uuid('userId')
-    .references(() => user.userId)
+    .references(() => user.userId, { onDelete: 'cascade', onUpdate: 'cascade' })
     .notNull()
     .unique(),
   bio: text('bio').notNull(),
